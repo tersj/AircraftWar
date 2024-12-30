@@ -1,0 +1,109 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractEnemy
+{
+    + AbstractEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + {abstract}Score():int
+    + {abstract}product(int x,int y):List<AbstractProp>
+}
+
+interface EnemyFactory
+{
+    + {abstract} createEnemy():AbstractEnemy
+    + {abstract} getEnemyHp():int
+    + {abstract} getEnemySpeedX():int
+    + {abstract} getEnemySpeedY():int
+}
+
+AbstractEnemy <|-- MobEnemy
+AbstractEnemy <|-- EliteEnemy
+AbstractEnemy <|-- Boss
+
+EnemyFactory <|-- MobFactory
+EnemyFactory <|-- EliteFactory
+EnemyFactory <|-- BossFactory
+
+EnemyFactory ..> MobEnemy
+EnemyFactory ..> EliteEnemy
+EnemyFactory ..> Boss
+
+class MobEnemy
+{
+    + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + product(int x,int y):List<AbstractProp>
+    + Score():int
+    + getDirection():int
+    + getShootNum():int
+    + getPower():int
+}
+
+class EliteEnemy
+{
+    - shootNum:int
+    - power:int
+    - direction:int
+    - prop:AbstractProp
+    - propFactory:PropFactory
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + product(int x,int y):List<AbstractProp>
+    + Score():int
+    + getDirection():int
+    + getShootNum():int
+    + getPower():int
+}
+
+class Boss
+{
+    - shootNum:int
+    - power:int
+    - direction:int
+    - prop:AbstractProp
+    - propFactory:PropFactory
+    + Boss(int locationX, int locationY, int speedX, int speedY, int hp)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + product(int x,int y):List<AbstractProp>
+    + Score():int
+    + getDirection():int
+    + getShootNum():int
+    + getPower():int
+}
+
+class MobFactory
+{
+    -speedX:int
+    -speedY:int
+    -hp:int
+    +getEnemyHp():int
+    +getEnemySpeedX():int
+    +getEnemySpeedY():int
+    +createEnemy():AbstractEnemy
+}
+
+class EliteFactory
+{
+    -speedX:int
+    -speedY:int
+    -hp:int
+    +getEnemyHp():int
+    +getEnemySpeedX():int
+    +getEnemySpeedY():int
+    +createEnemy():AbstractEnemy
+}
+
+class BossFactory
+{
+    -speedX:int
+    -speedY:int
+    -hp:int
+    +getEnemyHp():int
+    +getEnemySpeedX():int
+    +getEnemySpeedY():int
+    +createEnemy():AbstractEnemy
+}
+@enduml

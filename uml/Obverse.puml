@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractAim
+{
+    # observers:ArrayList
+    + attach(MyObserver observer):void
+    + {abstract}notice():void
+}
+
+class AimBomb
+{
+    +notice():void
+}
+
+class EnemyBulletList
+{
+    -enemyBullets:List<BaseBullet>
+    -enemies:List<AbstractEnemy>
+    +EnemyBulletList(List<AbstractEnemy> enemies,List<BaseBullet> enemyBullets)
+    +response():void
+}
+
+class EnemyList
+{
+    -enemyBullets:List<BaseBullet>
+    -enemies:List<AbstractEnemy>
+    +EnemyList(List<AbstractEnemy> enemies,List<BaseBullet> enemyBullets)
+    +response():void
+}
+
+interface MyOserver
+{
+    +response():void
+}
+
+class PropBomb
+{
+    +function():void
+}
+
+AbstractAim <|-- AimBomb
+MyOserver <|.. EnemyBulletList
+MyOserver <|.. EnemyList
+MyOserver <--o AbstractAim
+AbstractAim <.. PropBomb
+@enduml

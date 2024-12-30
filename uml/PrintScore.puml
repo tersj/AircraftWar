@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ScoreDaoImpl
+{
+    -playerScores:List<PlayerScore>
+    -file:File
+    +doAdd(PlayerScore playerScore)):void
+    +doDelete(List<PlayerScore> playerScores,String time):void
+    +readFile():void
+    +clearFile():void
+    +writeFile(List<PlayerScore> playerScores):void
+    +getAllScores():List<PlayerScore>
+}
+
+class PlayerScore
+{
+    -playerName:String
+    -score:int
+    -time:String
+    -degree:String
+    +PlayerScore(String playerName,int score,String time,String degree)
+    +getPlayerName():String
+    +getDegree():String
+    +getPlayerScore():int
+    +getTime():String
+}
+
+interface PlayerScoreDao
+{
+    +getAllScores():List<PlayerScore>
+    +doAdd(PlayerScore playerScore):void
+    +doDelete(List<PlayerScore> playerScores,String time):void
+}
+
+class input
+{
+    +Print():void
+}
+
+ScoreDaoImpl --> PlayerScore
+PlayerScoreDao <|.. ScoreDaoImpl
+input ..> PlayerScoreDao
+
+@enduml

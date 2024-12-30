@@ -1,0 +1,87 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Game
+{
+    -backGroundTop:int
+    -executorService:{final}ScheduledExecutorService
+    -timeInterval:int
+    -heroAircraft:{final}HeroAircraft
+    -enemy:AbstractEnemy
+    -enmeyFactory:EnemyFactory
+    -props:{final}List<AbstractProp>
+    -enemies:{final}List<AbstractEnemy>
+    -heroBullets:{final}List<BaseBullet>
+    -enemyBullets:{final}List<BaseBullet>
+    +boss:{static}int
+    +bossMaxNumber:{static}int
+    -gameOverFlag:boolean
+    +score:{static}int
+    -time:int
+    -cycleDuration:int
+    -cycleTime:int
+    -shootFlash:int
+    -degreeFlash:int
+    +degreeIncrease:{static}int
+    +{final}action():void
+    +{abstract}enemyProduce(List<AbstractEnemy> enemies):List<AbstractEnemy>
+    -timeCountAndNewCycleJudge():boolean
+    -shootAction():void
+    -bulletsMoveAction():void
+    -aircraftsMoveAction():void
+    -propMoveAction():void
+    -crashCheckAction():void
+    -postProcessAction():void
+    +paint(Graphic g):void
+    -paintImageWithPositionRevised(Graphic g,List<? extends AbstractFlyingObject> objects):void
+    -paintScoreAndLife(Graphic g):void
+}
+
+class EasyGame
+{
+    -BACKGROUND:BufferedImage
+    -enmeyFactory:EnemyFactory
+    -enemy:AbstractEnemy
+    -enemyMax:int
+    +EasyGame()
+    +enemyProduce(List<AbstractEnemy> enemies):List<AbstractEnemy>
+    +paint(Graphic g):void
+}
+
+class NormalGame
+{
+    -BACKGROUND:BufferedImage
+    -enmeyFactory:EnemyFactory
+    -enemy:AbstractEnemy
+    -enemyMax:int
+    -creatBossScore:int
+    +NormalGame()
+    +enemyProduce(List<AbstractEnemy> enemies):List<AbstractEnemy>
+    +paint(Graphic g):void
+}
+
+class HardGame
+{
+    -BACKGROUND:BufferedImage
+    -enmeyFactory:EnemyFactory
+    -enemy:AbstractEnemy
+    -enemyMax:int
+    -creatBossScore:int
+    -hpIncraese:int
+    -i:int
+    +HardGame()
+    +enemyProduce(List<AbstractEnemy> enemies):List<AbstractEnemy>
+    +paint(Graphic g):void
+}
+
+class main
+{
+    +{static}main(String[] args):void
+}
+
+Game <|-- EasyGame
+Game <|-- NormalGame
+Game <|-- HardGame
+Game <.. main
+
+@enduml

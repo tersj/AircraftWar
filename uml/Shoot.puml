@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class AbstractAircraft
+{
+    +Context:class
+    -strategyShoot:StrategyShoot
+    +Context(StrategyShoot strategyShoot)
+    +exeStrategy(AbstractAircraft aircraft):List<BaseBullet>
+    +{abstract}abshoot():List<BaseBullet>
+}
+
+class ZhiShoot
+{
+    +fight(AbstractAircraft aircraft):List<BaseBullet>
+}
+
+interface StrategyShoot
+{
+    +{abstract}fight(AbstractAircraft aircraft):List<BaseBullet>
+}
+
+class SanShoot
+{
+    +fight(AbstractAircraft aircraft):List<BaseBullet>
+}
+
+class HeroAircraft
+{
+    +shoot():List<BaseBullet>
+}
+
+class Boss
+{
+    +shoot():List<BaseBullet>
+}
+
+class EliteEnemy
+{
+    +shoot():List<BaseBullet>
+}
+
+class MobEnemy
+{
+    +shoot():List<BaseBullet>
+}
+
+ZhiShoot ..|> StrategyShoot
+SanShoot ..|> StrategyShoot
+StrategyShoot <--o AbstractAircraft
+HeroAircraft ..> AbstractAircraft
+Boss ..> AbstractAircraft
+EliteEnemy ..> AbstractAircraft
+MobEnemy ..> AbstractAircraft
+
+@enduml
